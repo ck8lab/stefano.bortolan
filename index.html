@@ -45,77 +45,44 @@
       </div>
     </div>
   </section>
+
+  
 <!-- Chi sono -->
 <section id="about" class="about" tabindex="0">
   <div class="container">
+    
     <div class="section-header">
       <h2>Chi sono?</h2>
       <div class="underline"></div>
     </div>
+    
     <div class="about-content">
+      
       <div class="about-text">
         <p>
           Ho lavorato per oltre 15 anni nel calcio professionistico, tra serie B e serie C,
-          in squadre come Pro Vercelli, Alessandria, Aurora Pro Patria e Novara. <br><br>
-          La mia passione per la METODOLOGIA DELL’ALLENAMENTO e per gli sport di ENDURANCE
-          mi ha portato a indirizzare il mio lavoro verso questo mondo. <br><br>
-          Da diversi anni mi occupo della preparazione atletica per gli sport di endurance
-          come corsa su pista, su strada, trailrunning, ciclismo e discipline OCR.
+          in squadre come Pro Vercelli, Alessandria, Aurora Pro Patria e Novara.
+          <br><br>
+          La mia passione per la <strong>METODOLOGIA DELL’ALLENAMENTO</strong> e per gli sport
+          di <strong>ENDURANCE</strong> mi ha portato a indirizzare il mio lavoro verso questo mondo.
+          <br><br>
+          Da diversi anni mi occupo della preparazione atletica per gli sport di endurance come
+          corsa su pista, su strada, trailrunning, ciclismo e discipline OCR.
         </p>
       </div>
-
-      <!-- Carosello immagini -->
-      <div class="about-image carousel">
-        <div class="slides">
-          <img src="image/foto_personali/profilo.jpg" alt="Stefano Bortolan 1" />
-          <img src="image/foto_personali/profilo2.jpg" alt="Stefano Bortolan 2" />
-          <img src="image/foto_personali/profilo3.jpg" alt="Stefano Bortolan 3" />
-          <img src="image/foto_personali/profilo4.jpg" alt="Stefano Bortolan 4" />
-        </div>
+      
+      <div class="about-image">
+        <img 
+          src="image/foto_personali/profilo.jpg" 
+          alt="Stefano Bortolan, preparatore atletico" 
+          loading="lazy" 
+        />
       </div>
+    
     </div>
   </div>
 </section>
 
-<!-- JS per il carosello -->
-<script>
-  let currentIndex = 0;
-  const slides = document.querySelectorAll(".carousel .slides img");
-  
-  function showSlide(index) {
-    slides.forEach((img, i) => {
-      img.style.display = i === index ? "block" : "none";
-    });
-  }
-
-  function nextSlide() {
-    currentIndex = (currentIndex + 1) % slides.length;
-    showSlide(currentIndex);
-  }
-
-  // avvia il carosello ogni 5 secondi
-  setInterval(nextSlide, 5000);
-
-  // mostra subito la prima slide
-  showSlide(currentIndex);
-</script>
-
-<style>
-  .carousel {
-    width: 100%;
-    max-width: 400px; /* stessa larghezza della tua foto */
-    position: relative;
-    overflow: hidden;
-    border-radius: 12px;
-  }
-
-  .carousel .slides img {
-    width: 100%;
-    height: auto;
-    display: none;
-  }
-</style>
-<!--fine sezione chi sono-->
 
   <!-- Come lavoro -->
   <section id="work" class="services" tabindex="0">
