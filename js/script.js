@@ -94,12 +94,7 @@ window.addEventListener('load', () => {
   requestAnimationFrame(animateSlider);
 });
 
-// Pause slider on hover
-const athleteSlider = document.querySelector('.athlete-slider');
-if (athleteSlider) {
-  athleteSlider.addEventListener('mouseenter', () => { speed = 0; });
-  athleteSlider.addEventListener('mouseleave', () => { speed = 0.6; });
-}
+
 
 // ======================
 // RESPONSIVE RESIZE
