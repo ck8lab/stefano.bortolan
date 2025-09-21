@@ -115,9 +115,9 @@ window.addEventListener('resize', () => {
 // ======================
 const heroBg = document.querySelector('.hero-bg-slider');
 const heroImages = [
-  'image/hero1.png',
-  'image/hero2.png',
-  'image/hero3.png'
+  'image/hero/hero1.png',
+  'image/hero/hero2.png',
+  'image/hero/hero3.png'
 ];
 let currentHeroIndex = 0;
 

@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="icon" href="image/logo.jpeg" type="image/jpeg">
+  <link rel="icon" href="image/logo.jpg" type="image/png">
 </head>
 <body>
 
@@ -37,7 +37,7 @@
       <div class="hero-inner">
         <h1>Ciao, sono<br><span class="highlight">Stefano Bortolan</span></h1>
         <h2>Preparatore Atletico Professionista</h2>
-        <p>15 anni di esperienza nel calcio professionistico tra squadre di serie B e serie C</p>
+        <p>Specializzato nell’allenamento di endurance per atleti professionisti e non</p>
         <div class="cta-buttons">
           <a href="#contact" class="btn primary-btn">Contattami</a>
           <a href="#extra" class="btn secondary-btn">Dove Lavoro</a>
@@ -45,26 +45,77 @@
       </div>
     </div>
   </section>
-
-  <!-- Chi sono -->
-  <section id="about" class="about" tabindex="0">
-    <div class="container">
-      <div class="section-header">
-        <h2>Chi sono?</h2>
-        <div class="underline"></div>
+<!-- Chi sono -->
+<section id="about" class="about" tabindex="0">
+  <div class="container">
+    <div class="section-header">
+      <h2>Chi sono?</h2>
+      <div class="underline"></div>
+    </div>
+    <div class="about-content">
+      <div class="about-text">
+        <p>
+          Ho lavorato per oltre 15 anni nel calcio professionistico, tra serie B e serie C,
+          in squadre come Pro Vercelli, Alessandria, Aurora Pro Patria e Novara. <br><br>
+          La mia passione per la METODOLOGIA DELL’ALLENAMENTO e per gli sport di ENDURANCE
+          mi ha portato a indirizzare il mio lavoro verso questo mondo. <br><br>
+          Da diversi anni mi occupo della preparazione atletica per gli sport di endurance
+          come corsa su pista, su strada, trailrunning, ciclismo e discipline OCR.
+        </p>
       </div>
-      <div class="about-content">
-        <div class="about-text">
-          <p>Ho lavorato per oltre 15 anni nel calcio professionistico, tra serie B e serie C, in squadre come Pro Vercelli, Alessandria, Aurora Pro Patria e Novara. <br><br>
-          La mia passione per la METODOLOGIA DELL’ALLENAMENTO e per gli sport di ENDURANCE mi ha portato a indirizzare il mio lavoro verso questo mondo. <br><br>
-          Da diversi anni mi occupo della preparazione atletica per gli sport di endurance come corsa su pista, su strada, trailrunning, ciclismo e discipline OCR.</p>
-        </div>
-        <div class="about-image">
-          <img src="image/profilo.jpg" alt="Stefano Bortolan, preparatore atletico" loading="lazy" />
+
+      <!-- Carosello immagini -->
+      <div class="about-image carousel">
+        <div class="slides">
+          <img src="image/foto_personali/profilo.jpg" alt="Stefano Bortolan 1" />
+          <img src="image/foto_personali/profilo2.jpg" alt="Stefano Bortolan 2" />
+          <img src="image/foto_personali/profilo3.jpg" alt="Stefano Bortolan 3" />
+          <img src="image/foto_personali/profilo4.jpg" alt="Stefano Bortolan 4" />
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
+
+<!-- JS per il carosello -->
+<script>
+  let currentIndex = 0;
+  const slides = document.querySelectorAll(".carousel .slides img");
+  
+  function showSlide(index) {
+    slides.forEach((img, i) => {
+      img.style.display = i === index ? "block" : "none";
+    });
+  }
+
+  function nextSlide() {
+    currentIndex = (currentIndex + 1) % slides.length;
+    showSlide(currentIndex);
+  }
+
+  // avvia il carosello ogni 5 secondi
+  setInterval(nextSlide, 5000);
+
+  // mostra subito la prima slide
+  showSlide(currentIndex);
+</script>
+
+<style>
+  .carousel {
+    width: 100%;
+    max-width: 400px; /* stessa larghezza della tua foto */
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+  }
+
+  .carousel .slides img {
+    width: 100%;
+    height: auto;
+    display: none;
+  }
+</style>
+<!--fine sezione chi sono-->
 
   <!-- Come lavoro -->
   <section id="work" class="services" tabindex="0">
@@ -90,13 +141,25 @@
           <p>Eseguo test di valutazione per individuare i punti deboli e migliorare le prestazioni.</p>
         </div>
 
-        <div class="service-card">
+      <div class="service-card">
           <div class="service-img-wrap">
-            <img src="image/con atleta.jpeg" class="service-icon" alt="Schede di preparazione atletica personalizzate" loading="lazy">
+            <img src="image/Schede di preparazione.jpg" class="service-icon" alt="Schede di preparazione atletica personalizzate" loading="lazy">
           </div>
           <h3>Schede di Preparazione</h3>
           <p>Preparo programmi personalizzati per i miei atleti per migliorare i loro risultati.</p>
         </div>
+        
+
+
+        <div class="service-card">
+          <div class="service-img-wrap">
+            <img src="image/con atleta.jpeg" class="service-icon" alt="Test di valutazione atletica" loading="lazy">
+          </div>
+          <h3>Propriocezione e Tecnica di corsa</h3>
+          <p>lavoro personalizzato in presenza per l’allenamento della forza specifica.</p>
+        </div>
+
+  
       </div>
     </div>
   </section>
@@ -112,16 +175,16 @@
         <div class="about-text" style="display:flex; flex-direction:column; align-items:center;">
           <p>La mia sede è all'interno di una Palestra Privata situata a Cerrione (BI), tra Santhià e Biella. Un ambiente professionale e accogliente, perfetto per allenamenti personalizzati di atleti di qualsiasi livello.</p>
           <div class="location-buttons" style="margin-top:20px; display:flex; justify-content:center; gap:15px; flex-wrap:wrap;">
-            <a href="https://www.google.com/maps/dir/?api=1&destination=Cerrione+BI" target="_blank" rel="noopener" class="maps-btn google-maps">
+            <a href="https://maps.app.goo.gl/NppRTHeghLHid4B18" target="_blank" rel="noopener" class="maps-btn google-maps">
               <i class="fab fa-google"></i> Indicazioni Google Maps
             </a>
-            <a href="https://maps.apple.com/?daddr=Cerrione,BI" target="_blank" rel="noopener" class="maps-btn apple-maps">
+            <a href="https://maps.apple/p/.eo7bmg5MfYx6.z" target="_blank" rel="noopener" class="maps-btn apple-maps">
               <i class="fab fa-apple"></i> Indicazioni Apple Maps
             </a>
           </div>
         </div>
         <div class="about-image" style="text-align:center;">
-          <img src="image/palestra esempio.jpg" alt="Palestra privata a Cerrione" style="border-radius:12px; max-width:100%; box-shadow:0 5px 15px rgba(0,0,0,0.15);" loading="lazy"/>
+          <img src="image/Palestra.png" alt="Palestra privata a Cerrione" style="border-radius:12px; max-width:100%; box-shadow:0 5px 15px rgba(0,0,0,0.15);" loading="lazy"/>
         </div>
       </div>
     </div>
@@ -137,34 +200,64 @@
       <div class="athlete-slider" aria-hidden="false">
         <div class="slider-track">
           <!-- Card atleti -->
+           <!--atleta 1-->
           <div class="card">
-            <img src="image/atleta 1.jpeg" class="card-img-top" alt="Ludovica, runner professionista" loading="lazy">
+            <img src="image/atleti/stefano_grendene.png" class="card-img-top" alt="Ludovica, runner professionista" loading="lazy">
             <div class="card-body">
-              <h5 class="card-title">Ludovica</h5>
-              <p class="card-text">Runner Professionista</p>
+              <h4 class="card-title">Stefano Grendene</h4>
+              <p class="card-text ">Specialista dell’Atletica Leggera (400 e 200 m piani) </p>
             </div>
           </div>
+ <!--atleta 2-->
           <div class="card">
-            <img src="image/atleta 2.jpeg" class="card-img-top" alt="Gianluca, triatleta" loading="lazy">
+            <img src="image/atleti/greta_negro.png" class="card-img-top" alt="Gianluca, triatleta" loading="lazy">
             <div class="card-body">
-              <h5 class="card-title">Gianluca</h5>
-              <p class="card-text">Triathlon</p>
+              <h4 class="card-title">Greta Negro</h4>
+              <p class="card-text ">Runner specialista del mezzofondo (10'09" sui 3000m, 17'43" sui 5 k, 36'54" sui 10000 m)</p>
             </div>
           </div>
+ <!--atleta 3-->
           <div class="card">
-            <img src="image/atleta 3.jpeg" class="card-img-top" alt="Carlo & Alessandro, ciclisti amatoriali" loading="lazy">
+            <img src="image/atleti/nicolò_pigino.jpg" class="card-img-top" alt="Carlo & Alessandro, ciclisti amatoriali" loading="lazy">
             <div class="card-body">
-              <h5 class="card-title">Carlo & Alessandro</h5>
-              <p class="card-text">Ciclismo Amatoriale</p>
+              <h4 class="card-title">Nicolò Pigino</h4>
+              <p class="card-text">Runner classe 2011 con un personale di 2'45" sui 1000 m</p>
             </div>
           </div>
+ <!--atleta 4-->
           <div class="card">
-            <img src="image/atleta 4.jpeg" class="card-img-top" alt="Aldo, sollevamento pesi" loading="lazy">
+            <img src="image/atleti/lara_lovisi.png" class="card-img-top" alt="Aldo, sollevamento pesi" loading="lazy">
             <div class="card-body">
-              <h5 class="card-title">Aldo</h5>
-              <p class="card-text">Sollevamento Pesi</p>
+              <h4 class="card-title">Lara Lovisi</h4>
+              <p class="card-text">Triatlheta classe 2010 di livello nazionale e internazionale</p>
             </div>
           </div>
+         <!--atleta 5-->
+          <div class="card">
+            <img src="image/atleti/andrè_barailler.png" class="card-img-top" alt="Aldo, sollevamento pesi" loading="lazy">
+            <div class="card-body">
+              <h4 class="card-title">Andrè Barailler</h4>
+              <p class="card-text">Trailrunner con un ITRA index di 773</p>
+            </div>
+          </div>
+         <!--atleta 6-->
+          <div class="card">
+            <img src="image/atleti/federico_magagna.png" class="card-img-top" alt="Aldo, sollevamento pesi" loading="lazy">
+            <div class="card-body">
+              <h4 class="card-title">Federico Magagna</h4>
+              <p class="card-text">Trailrunner con un ITRA index di 785</p>
+            </div>
+          </div>
+                   <!--atleta 7-->
+          <div class="card">
+            <img src="image/atleti/ludovica_boetto.png" class="card-img-top" alt="Aldo, sollevamento pesi" loading="lazy">
+            <div class="card-body">
+              <h4 class="card-title">Ludovica Boetto</h4>
+              <p class="card-text">Campionessa europea nella Spartan Race age group 30-34</p>
+            </div>
+          </div>
+
+
         </div>
       </div>
     </div>
@@ -178,22 +271,22 @@
         <div class="underline"></div>
       </div>
       <div class="contact-cards-grid">
-        <a href="mailto:info@stefanobortolan.it" class="contact-card" aria-label="Scrivi email">
+        <a href="mailto:Stefano.bortolan@alice.it" class="contact-card" aria-label="Scrivi email">
           <i class="fas fa-envelope fa-3x" aria-hidden="true"></i>
           <h4>Email</h4>
           <span class="contact-cta">Scrivi Email</span>
         </a>
-        <a href="tel:+393881543973" class="contact-card" aria-label="Chiama">
+        <a href="tel:+393405968900" class="contact-card" aria-label="Chiama">
           <i class="fas fa-phone fa-3x" aria-hidden="true"></i>
           <h4>Telefono</h4>
           <span class="contact-cta">Chiama</span>
         </a>
-        <a href="https://www.instagram.com/stefanobortolan/" target="_blank" rel="noopener" class="contact-card" aria-label="Apri Instagram">
+        <a href="https://www.instagram.com/sbt_endurance_specialist/" target="_blank" rel="noopener" class="contact-card" aria-label="Apri Instagram">
           <i class="fab fa-instagram fa-3x" aria-hidden="true"></i>
           <h4>Instagram</h4>
           <span class="contact-cta">Apri Instagram</span>
         </a>
-        <a href="https://wa.me/393881543973" target="_blank" rel="noopener" class="contact-card" aria-label="Apri WhatsApp">
+        <a href="https://wa.me/393405968900" target="_blank" rel="noopener" class="contact-card" aria-label="Apri WhatsApp">
           <i class="fab fa-whatsapp fa-3x" aria-hidden="true"></i>
           <h4>WhatsApp</h4>
           <span class="contact-cta">Apri WhatsApp</span>
@@ -219,9 +312,9 @@
         </ul>
       </div>
       <div class="footer-social">
-        <a href="mailto:info@stefanobortolan.it"><i class="fas fa-envelope"></i></a>
-        <a href="https://www.instagram.com/stefanobortolan/" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
-        <a href="tel:+393881543973"><i class="fas fa-phone"></i></a>
+        <a href="mailto:Stefano.bortolan@alice.it"><i class="fas fa-envelope"></i></a>
+        <a href="https://www.instagram.com/sbt_endurance_specialist/" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+        <a href="tel:+393405968900"><i class="fas fa-phone"></i></a>
       </div>
     </div>
     <div class="footer-bottom">
