@@ -10,7 +10,6 @@ hamburger.addEventListener('click', () => {
   hamburger.setAttribute('aria-expanded', expanded);
 });
 
-// Chiudi il menu quando clicchi un link (mobile)
 document.querySelectorAll('.nav-links a').forEach(link => {
   link.addEventListener('click', () => {
     if (navLinks.classList.contains('active')) {
@@ -24,8 +23,6 @@ document.querySelectorAll('.nav-links a').forEach(link => {
 // ======================
 // SCROLL EFFECTS
 // ======================
-
-// Navbar shadow on scroll e animazioni
 window.addEventListener('scroll', () => {
   const navbar = document.querySelector('.navbar');
   if (window.scrollY > 50) navbar.classList.add('scrolled');
@@ -34,7 +31,6 @@ window.addEventListener('scroll', () => {
   animateOnScroll();
 });
 
-// Animate elements on scroll (service cards, about, contact)
 function animateOnScroll() {
   const elements = document.querySelectorAll('.service-card, .about-content, .contact-cards-grid a.contact-card');
   elements.forEach(el => {
@@ -45,65 +41,7 @@ function animateOnScroll() {
   });
 }
 
-// Initial call
 animateOnScroll();
-
-// ======================
-// CONTINUOUS ATHLETES SLIDER
-// ======================
-const sliderTrack = document.querySelector('.slider-track');
-let pos = 0;
-let speed = 0.6; // px per frame
-let blockWidth = 0;
-let cloneTrack = null;
-
-function setupSlider() {
-  if (!sliderTrack) return;
-
-  // Clono tutto il blocco originale
-  cloneTrack = sliderTrack.cloneNode(true);
-  sliderTrack.parentElement.appendChild(cloneTrack);
-
-  // Larghezza del blocco originale
-  blockWidth = sliderTrack.scrollWidth;
-
-  // Posizionamento iniziale del clone subito dopo l’originale
-  cloneTrack.style.position = "absolute";
-  cloneTrack.style.left = blockWidth + "px";
-  cloneTrack.style.top = "0";
-  cloneTrack.style.display = "flex";
-}
-
-function animateSlider() {
-  pos -= speed;
-
-  // Reset quando un intero blocco è uscito
-  if (Math.abs(pos) >= blockWidth) {
-    pos = 0;
-  }
-
-  sliderTrack.style.transform = `translateX(${pos}px)`;
-  cloneTrack.style.transform = `translateX(${pos}px)`;
-
-  requestAnimationFrame(animateSlider);
-}
-
-// Setup e animazione al load
-window.addEventListener('load', () => {
-  setupSlider();
-  requestAnimationFrame(animateSlider);
-});
-
-
-
-// ======================
-// RESPONSIVE RESIZE
-// ======================
-window.addEventListener('resize', () => {
-  if (!sliderTrack || !cloneTrack) return;
-  blockWidth = sliderTrack.scrollWidth;
-  cloneTrack.style.left = blockWidth + "px";
-});
 
 // ======================
 // HERO BACKGROUND SLIDER
@@ -122,14 +60,91 @@ function changeHeroBg() {
   currentHeroIndex = (currentHeroIndex + 1) % heroImages.length;
 }
 
-// Cambia immagine ogni 5 secondi
 setInterval(changeHeroBg, 5000);
 window.addEventListener('load', changeHeroBg);
-
-// Assicura che l'immagine copra correttamente la sezione anche al resize
 window.addEventListener('resize', () => {
   if (heroBg) {
     heroBg.style.backgroundSize = 'cover';
     heroBg.style.backgroundPosition = 'center';
   }
 });
+
+// ======================
+// ATHLETES SLIDER (AUTO + DRAG + RIPARTO DOPO 7s)
+// ======================
+const sliderContainer = document.querySelector('.athlete-slider');
+const sliderTrack = document.querySelector('.slider-track');
+
+if (sliderContainer && sliderTrack) {
+  // Duplico le card per loop infinito
+  const cloneTrack = sliderTrack.cloneNode(true);
+  sliderTrack.parentElement.appendChild(cloneTrack);
+  cloneTrack.style.position = "absolute";
+  cloneTrack.style.left = sliderTrack.scrollWidth + "px";
+  cloneTrack.style.top = "0";
+  cloneTrack.style.display = "flex";
+
+  let pos = 0;
+  let speed = 0.6;
+  let isDragging = false;
+  let autoScroll = true; // stato auto-scroll
+  let startX;
+  let currentPos;
+  let pauseTimeout;
+
+  function animate() {
+    if (!isDragging && autoScroll) {
+      pos -= speed;
+      if (Math.abs(pos) >= sliderTrack.scrollWidth) pos = 0;
+
+      sliderTrack.style.transform = `translateX(${pos}px)`;
+      cloneTrack.style.transform = `translateX(${pos}px)`;
+    }
+    requestAnimationFrame(animate);
+  }
+
+  animate();
+
+  function startDrag(e) {
+    isDragging = true;
+    autoScroll = false; // ferma auto-scroll
+    clearTimeout(pauseTimeout);
+
+    startX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+    currentPos = pos;
+  }
+
+  function drag(e) {
+    if (!isDragging) return;
+    const x = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+    const walk = x - startX;
+    pos = currentPos + walk;
+
+    sliderTrack.style.transform = `translateX(${pos}px)`;
+    cloneTrack.style.transform = `translateX(${pos}px)`;
+  }
+
+  function endDrag() {
+    isDragging = false;
+
+    // Riparte auto-scroll dopo 7 secondi dall'ultimo drag
+    clearTimeout(pauseTimeout);
+    pauseTimeout = setTimeout(() => {
+      autoScroll = true;
+    }, 3000);
+  }
+
+  // Event listeners drag e touch
+  sliderContainer.addEventListener('mousedown', startDrag);
+  sliderContainer.addEventListener('touchstart', startDrag);
+  sliderContainer.addEventListener('mousemove', drag);
+  sliderContainer.addEventListener('touchmove', drag);
+  sliderContainer.addEventListener('mouseup', endDrag);
+  sliderContainer.addEventListener('mouseleave', endDrag);
+  sliderContainer.addEventListener('touchend', endDrag);
+
+  // Resize
+  window.addEventListener('resize', () => {
+    cloneTrack.style.left = sliderTrack.scrollWidth + "px";
+  });
+}
