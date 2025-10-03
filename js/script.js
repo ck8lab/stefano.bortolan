@@ -70,13 +70,13 @@ window.addEventListener('resize', () => {
 });
 
 // ======================
-// ATHLETES SLIDER (AUTO + DRAG + RIPARTO DOPO 7s)
+// ATHLETES SLIDER (AUTO + DRAG + RIPARTO DOPO 7s + LOOP INFINITO)
 // ======================
 const sliderContainer = document.querySelector('.athlete-slider');
 const sliderTrack = document.querySelector('.slider-track');
 
 if (sliderContainer && sliderTrack) {
-  // Duplico le card per loop infinito
+  // Clono la track per creare loop infinito
   const cloneTrack = sliderTrack.cloneNode(true);
   sliderTrack.parentElement.appendChild(cloneTrack);
   cloneTrack.style.position = "absolute";
@@ -87,15 +87,18 @@ if (sliderContainer && sliderTrack) {
   let pos = 0;
   let speed = 0.6;
   let isDragging = false;
-  let autoScroll = true; // stato auto-scroll
-  let startX;
-  let currentPos;
+  let autoScroll = true;
+  let startX, currentPos;
   let pauseTimeout;
+
+  const trackWidth = sliderTrack.scrollWidth;
 
   function animate() {
     if (!isDragging && autoScroll) {
       pos -= speed;
-      if (Math.abs(pos) >= sliderTrack.scrollWidth) pos = 0;
+
+      // Loop infinito
+      if (Math.abs(pos) >= trackWidth) pos = 0;
 
       sliderTrack.style.transform = `translateX(${pos}px)`;
       cloneTrack.style.transform = `translateX(${pos}px)`;
@@ -105,9 +108,10 @@ if (sliderContainer && sliderTrack) {
 
   animate();
 
+  // Funzioni drag
   function startDrag(e) {
     isDragging = true;
-    autoScroll = false; // ferma auto-scroll
+    autoScroll = false;
     clearTimeout(pauseTimeout);
 
     startX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
@@ -131,7 +135,7 @@ if (sliderContainer && sliderTrack) {
     clearTimeout(pauseTimeout);
     pauseTimeout = setTimeout(() => {
       autoScroll = true;
-    }, 3000);
+    }, 7000);
   }
 
   // Event listeners drag e touch
